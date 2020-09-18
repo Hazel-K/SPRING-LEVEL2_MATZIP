@@ -3,7 +3,7 @@
 <div id="sectionContainerCenter">
 	<div>
 		<div class="msg">${msg}</div>
-		<form action="/user/loginProc" name="frm" class="loginFrm" method="post">
+		<form action="/user/login" name="frm" class="loginFrm" method="post">
 			<h1>MatZip</h1>
 		<!-- action에 / 붙이면 localhost:3036 다음부터 시작(처음부터), 안붙이면 해당 주소 다음부터 이어서나감 -->
 			<div>

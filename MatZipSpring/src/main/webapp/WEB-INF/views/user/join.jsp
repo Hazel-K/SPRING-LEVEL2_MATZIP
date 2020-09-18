@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <div id="sectionContainerCenter">
 	<div id="joinContainer">
-	<form class="joinFrm" id="frm" name="Frm" action="/user/joinProc" method="post" onsubmit="return chkJoin()">
+	<form class="joinFrm" id="frm" name="Frm" action="/user/join" method="post" onsubmit="return chkJoin()">
 	<!-- action에 / 붙이면 localhost:3036 다음부터 시작(처음부터), 안붙이면 해당 주소 다음부터 이어서나감 -->
 		<input id="grid0" type="text" name="user_id" placeholder="아이디"><span id="chkId" onclick="chkId()">중복확인</span>
 		<div id="grid2">
