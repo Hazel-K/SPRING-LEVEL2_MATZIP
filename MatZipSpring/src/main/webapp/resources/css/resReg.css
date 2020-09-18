@@ -1,0 +1,53 @@
+#sectionContainerCenter {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#regTitle {
+	font-size: 1.5em;
+	font-weight: 600;
+	margin-bottom: 5%;
+}
+
+.regGrid {
+	display: grid;
+	grid-template-columns: 300px 100px;
+	grid-template-rows: auto;
+	grid-gap: 5px;
+	grid-template-areas: 
+		"grid1 ."
+		"grid2 grid3"
+		"grid6 ."
+		"grid4 ."
+		"grid5 ."
+	;
+}
+
+#regGrid1 {
+	grid-area: grid1;
+}
+
+#regGrid2 {
+	grid-area: grid2;
+}
+
+#regGrid3 {
+	grid-area: grid3;
+}
+
+#regGrid4 {
+	grid-area: grid4;
+	justify-self: flex-end;
+}
+
+#regGrid5 {
+	grid-area: grid5;
+	justify-self: flex-end;
+}
+
+#regGrid6 {
+	grid-area: grid6;
+}

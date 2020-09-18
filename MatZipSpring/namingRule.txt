@@ -1,0 +1,17 @@
+동사 앞, 명사 뒤
+
+클래스명 파스칼, 메소드명 카멜 케이스 기법 사용
+메소드명 앞에는 _ 붙임
+변수명 단어 구분은 _
+
+MODEL
+DMI(Domain) - select 결과용
+DTO - select parameter 용
+VO - insert, update, delete 용
+
+CRUD
+(Java, DB)
+ins
+__Sel / Sel_list
+upd
+del

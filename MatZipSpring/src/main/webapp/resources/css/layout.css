@@ -1,0 +1,101 @@
+@charset "utf-8";
+
+@import "reset.css";
+@import "resReg.css";
+
+#bgTag {
+	position: absolute;
+	width: 100%;
+	height: 80vh;
+	top: 0;
+	left: 0;
+	background-color: rgba(0, 0, 0, 0.2);
+	z-index: -1;
+}
+
+.hWrapper {
+	margin: 0 auto;
+	width: 83%;
+	min-width: 663px;
+	height: 25vh;
+	background-color: rgb(189, 255, 243);
+	display: grid;
+	grid-template-rows: 1fr auto auto;
+}
+
+#containerPImg {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+}
+
+#printUserMsg {
+	margin-right: 5px;
+}
+
+.loginUserImg {
+	width: 30px;
+	height: 30px;
+	border-radius: 45%;
+}
+
+#header_menus {
+	display: flex;
+}
+
+#header_menus li {
+	padding: 20px 40px;
+	cursor: pointer;
+	font-size: 2em;
+	font-weight: 600;
+}
+
+.pointer {
+	cursor: pointer;
+}
+
+.sWrapper {
+	width: 83%;
+	margin: 30px auto 80px auto;
+	display: flex;
+	justify-content: center;
+}
+
+.arWrapper {
+	width: 76%;
+	min-width: 450px;
+	margin-right: 2%;
+	height: 80vh;
+	background-color: indianred;
+	overflow: scroll;
+}
+
+.asWrapper {
+	width: 24%;
+	min-width: 200px;
+	height: 80vh;
+	background-color: gray;
+}
+
+.fWrapper {
+	margin: 0 auto;
+	width: 100%;
+	min-width: 663px;
+	height: 15vh;
+	background-color: rgba(0, 0, 0, 0.8);
+	color: white;
+	font-weight: 800;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.fWrapper div {
+	margin: 3px 0px;
+}
+
+#footerTitle {
+	font-size: 1.5em;
+	margin-bottom: 15px;
+}
