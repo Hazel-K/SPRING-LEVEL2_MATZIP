@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <div id="sectionContainerCenter">
+	<div style="color: red;">${msg}</div>
 	<div id="joinContainer">
 	<form class="joinFrm" id="frm" name="Frm" action="/user/join" method="post" onsubmit="return chkJoin()">
 	<!-- action에 / 붙이면 localhost:3036 다음부터 시작(처음부터), 안붙이면 해당 주소 다음부터 이어서나감 -->
@@ -37,18 +38,18 @@
 				frm.user_id.focus()
 				return false
 			}
-			if (checkedId != 0) {
-				switch(checkedId) {
-				case '1':
-					alert('아이디 중복검사를 먼저 진행해주세요.')
-					frm.user_id.focus()
-					return false
-				case '2':
-					alert('중복된 아이디로는 가입하실 수 없습니다.')
-					frm.user_id.focus()
-					return false
-				}
-			}
+//			if (checkedId != 0) {
+//				switch(checkedId) {
+//				case '1':
+//					alert('아이디 중복검사를 먼저 진행해주세요.')
+//					frm.user_id.focus()
+//					return false
+//				case '2':
+//					alert('중복된 아이디로는 가입하실 수 없습니다.')
+//					frm.user_id.focus()
+//					return false
+//				}
+//			}
 			if (user_pw == '') {
 				alert('비밀번호를 입력해주세요')
 				frm.user_pw.focus()
