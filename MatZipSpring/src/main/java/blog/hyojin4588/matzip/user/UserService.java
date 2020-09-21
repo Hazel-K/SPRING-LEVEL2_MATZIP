@@ -18,19 +18,16 @@ public class UserService {
 
 	// 1: 로그인 성공, 2: 아이디 없음, 3: 비밀번호 틀림
 	public int login(UserPARAM param) {
-		if (param.getUser_id().equals("")) {
-			return Const.NO_ID;
-		}
-		if (param.getUser_pw().equals("")) {
-			return Const.NO_PW;
-		}
+		if ("".equals(param.getUser_id())) { return Const.NO_ID; }
 		UserDMI dbUser = mapper.selUser(param);
+		if (null == dbUser) { return Const.NO_ID; }
+		
 		String inputPw = SecurityUtils.getEncrypt(param.getUser_pw(), dbUser.getSalt());
 // 		System.out.println(param.getUser_pw());
 // 		System.out.println(dbUser.getSalt());
 // 		System.out.println(inputPw);
 // 		System.out.println(dbUser.getUser_pw());
-		if (!dbUser.getUser_pw().equals(inputPw)) { return Const.NO_PW; }
+		if (!inputPw.equals(dbUser.getUser_pw())) { return Const.NO_PW; }
 		
 		param.setUser_pw(null);
 		param.setNm(dbUser.getNm());
