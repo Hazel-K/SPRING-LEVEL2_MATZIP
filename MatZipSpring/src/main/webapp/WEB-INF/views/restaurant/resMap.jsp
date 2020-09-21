@@ -27,7 +27,22 @@
 
 	// 지도 마커 기능
 	function getRestaurantList() {
-		axios.get('/restaurant/ajaxGetList').then(function(res) {
+		const bounds = map.getBounds()
+		const south_west = bounds.getSouthWest()
+		const north_east = bounds.getNorthEast()
+//		console.log('SW:' + south_west)
+//		console.log('NE:' + north_east)
+		
+		const sw_lat = south_west.getLat()
+		const sw_lng = south_west.getLng()
+		const ne_lat = north_east.getLat()
+		const ne_lng = north_east.getLng()
+		
+		axios.get('/restaurant/ajaxGetList', {
+			params: {
+				sw_lat, sw_lng, ne_lat, ne_lng
+			}
+		}).then(function(res) {
 //			console.log(res.data);
 
 			res.data.forEach(function(item) {
@@ -35,7 +50,9 @@
 			});
 		});
 	}
-	getRestaurantList();
+	
+	kakao.maps.event.addListener(map, 'dragend', getRestaurantList)
+	kakao.maps.event.addListener(map, 'zoom_changed', getRestaurantList)
 	// 지도 마커 기능
 	
 	// 마커 생성 함수

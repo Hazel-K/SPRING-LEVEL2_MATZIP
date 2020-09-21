@@ -4,7 +4,7 @@
 <div id="sectionContainerCenter">
 	<div id="resRegContainer">
 		<h1 id="regTitle">등록하기</h1>
-		<form id="frm" class="regGrid" action="/restaurant/resRegProc" method="post" onsubmit="return chkFrm()">
+		<form id="frm" class="regGrid" action="/restaurant/resReg" method="post" onsubmit="return chkFrm()">
 			<input id="regGrid1" type="text" name="nm" placeholder="가게명">
 			<input id="regGrid2" type="text" name="addr" placeholder="주소" onchange="changeAddr()">
 			<button id="regGrid3" onclick="getLatLng()">좌표가져오기</button>
@@ -13,12 +13,14 @@
 			<input type="hidden" name="lng" value="0">
 			<input type="hidden" name="i_user" value="${loginUser.i_user}">
 			<div id="regGrid4">
+			<!-- 
 				<span>카테고리:</span>
 				<select name="cd_category" id="">
 					<c:forEach items="${categoryList}" var="item">
 						<option value="${item.cd}">${item.val}</option>
 					</c:forEach>
 				</select>
+			 -->
 			</div>
 			<div id="regGrid5"><input type="submit" value="등록"></div>
 		</form>

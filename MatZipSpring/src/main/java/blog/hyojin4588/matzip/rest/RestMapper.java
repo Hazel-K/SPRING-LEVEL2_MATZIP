@@ -1,11 +1,16 @@
 package blog.hyojin4588.matzip.rest;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
+
+import blog.hyojin4588.matzip.rest.model.RestDMI;
+import blog.hyojin4588.matzip.rest.model.RestPARAM;
 
 @Mapper
 public interface RestMapper {
 	
-//	public int insRest(RestVO p);
-//	public RestDMI selRest(RestPARAM p);
+	public List<RestDMI> selRestList(RestPARAM p);
+	public int insRest(RestPARAM p);
 
 }
