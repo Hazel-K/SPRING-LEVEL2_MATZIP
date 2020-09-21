@@ -2,12 +2,12 @@
 	pageEncoding="UTF-8"%>
 <div id="sectionContainerCenter">
 	<div>
-		<div class="msg">${msg}</div>
+		<div class="msg">${data.msg}</div>
 		<form action="/user/login" name="frm" class="loginFrm" method="post">
 			<h1>MatZip</h1>
 		<!-- action에 / 붙이면 localhost:3036 다음부터 시작(처음부터), 안붙이면 해당 주소 다음부터 이어서나감 -->
 			<div>
-				<input type="text" name="user_id" placeholder="아이디">
+				<input type="text" name="user_id" placeholder="아이디" value="${data.user_id}">
 			</div>
 			<div>
 				<input type="password" name="user_pw" placeholder="비밀번호">

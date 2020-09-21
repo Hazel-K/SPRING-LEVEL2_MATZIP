@@ -6,7 +6,7 @@
 
 MODEL
 DMI(Domain) - select 결과용
-DTO - select parameter 용
+PARAM - select parameter 용
 VO - insert, update, delete 용
 
 CRUD

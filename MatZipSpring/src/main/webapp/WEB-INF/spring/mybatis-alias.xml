@@ -4,6 +4,6 @@
 	<typeAliases>
 		<typeAlias type="blog.hyojin4588.matzip.user.model.UserVO" alias="UserVO"/>
 		<typeAlias type="blog.hyojin4588.matzip.user.model.UserDMI" alias="UserDMI"/>
-		<typeAlias type="blog.hyojin4588.matzip.user.model.UserDTO" alias="UserDTO"/>
+		<typeAlias type="blog.hyojin4588.matzip.user.model.UserPARAM" alias="UserPARAM"/>
 	</typeAliases>
 </configuration>
