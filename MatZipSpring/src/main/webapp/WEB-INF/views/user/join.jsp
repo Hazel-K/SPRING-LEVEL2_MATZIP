@@ -38,18 +38,18 @@
 				frm.user_id.focus()
 				return false
 			}
-//			if (checkedId != 0) {
-//				switch(checkedId) {
-//				case '1':
-//					alert('아이디 중복검사를 먼저 진행해주세요.')
-//					frm.user_id.focus()
-//					return false
-//				case '2':
-//					alert('중복된 아이디로는 가입하실 수 없습니다.')
-//					frm.user_id.focus()
-//					return false
-//				}
-//			}
+			if (checkedId != 0) {
+				switch(checkedId) {
+				case '1':
+					alert('아이디 중복검사를 먼저 진행해주세요.')
+					frm.user_id.focus()
+					return false
+				case '2':
+					alert('중복된 아이디로는 가입하실 수 없습니다.')
+					frm.user_id.focus()
+					return false
+				}
+			}
 			if (user_pw == '') {
 				alert('비밀번호를 입력해주세요')
 				frm.user_pw.focus()
