@@ -12,5 +12,6 @@ public interface RestMapper {
 	
 	public List<RestDMI> selRestList(RestPARAM p);
 	public int insRest(RestPARAM p);
+	public RestDMI selRest(RestPARAM p);
 
 }

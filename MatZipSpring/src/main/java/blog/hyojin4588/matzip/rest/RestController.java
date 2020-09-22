@@ -57,5 +57,15 @@ public class RestController {
 		}
 		return "redirect:/restaurant/resReg";
 	}
+	
+	@RequestMapping(value="/resDetail", method=RequestMethod.GET)
+	public String resDetail(Model model, RestPARAM param) {
+		RestDMI data = service.selRest(param);
+		
+		model.addAttribute("data", data);
+		model.addAttribute(Const.TITLE, data.getNm());
+		model.addAttribute(Const.VIEW, "/restaurant/resDetail");
+		return ViewRef.TYPE_1;
+	}
 
 }

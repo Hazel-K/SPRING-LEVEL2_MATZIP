@@ -21,6 +21,7 @@
         <header class="hWrapper">
             <div>그림</div>
             <div id="containerPImg">
+            	<c:if test="${loginUser != null}">
                 <div>
                 <c:choose>
                     <c:when test="${loginUser.profile_img != null}">
@@ -38,12 +39,22 @@
                     <span class="pointer" onclick="location.href='/user/logout'">로그아웃</span>
                     <span class="pointer">회원정보수정</span>
                 </div>
+                </c:if>
+                <c:if test="${loginUser == null}">
+                <div class="pointer" onclick="location.href='/user/login'">로그인</div>
+                </c:if>
             </div>
             <div>
             	<ul id="header_menus">
             		<li onclick="location.href='/restaurant/resMap'">홈</li>
+            		<c:if test="${loginUser != null}">
             		<li onclick="location.href='/restaurant/resReg'">등록</li>
             		<li onclick="location.href='/user/resFavorite'">찜</li>
+            		</c:if>
+            		<c:if test="${loginUser == null}">
+            		<li onclick="alert('로그인이 필요합니다.')">등록</li>
+            		<li onclick="alert('로그인이 필요합니다.')">찜</li>
+            		</c:if>
             	</ul>
             </div>
         </header>

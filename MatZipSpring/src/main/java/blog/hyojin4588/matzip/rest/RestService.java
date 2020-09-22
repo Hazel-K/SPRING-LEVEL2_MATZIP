@@ -21,19 +21,23 @@ public class RestService {
 	@Autowired
 	private CommonMapper cMapper;
 
-	List<RestDMI> selRestList(RestPARAM param) {
+	public List<RestDMI> selRestList(RestPARAM param) {
 		return mapper.selRestList(param);
 	}
 	
-	int insRest(RestPARAM param) {
+	public int insRest(RestPARAM param) {
 		return mapper.insRest(param);
 	}
 	
-	List<CodeVO> selCategoryList() {
+	public List<CodeVO> selCategoryList() {
 		CodeVO p = new CodeVO();
 		p.setI_m(1);
 		
 		return cMapper.selCodeList(p);
+	}
+	
+	public RestDMI selRest(RestPARAM param) {
+		return mapper.selRest(param);
 	}
 
 }
