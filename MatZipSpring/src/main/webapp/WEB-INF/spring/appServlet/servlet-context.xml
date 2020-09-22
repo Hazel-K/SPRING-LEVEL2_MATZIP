@@ -50,6 +50,15 @@
 		<beans:property name="configLocation" value="/WEB-INF/spring/mybatis-alias.xml"/>
 	</beans:bean>
 	
+	<!-- mybatis -->
 	<mybatis-spring:scan base-package="blog.hyojin4588.matzip"/>
+	
+	<!-- 데이터 캐처 -->
+	<interceptors>
+		<interceptor>
+			<mapping path="/**"/>
+			<beans:bean class="blog.hyojin4588.matzip.LoginCheckInterceptor"/>
+		</interceptor>
+	</interceptors>
 	
 </beans:beans>
