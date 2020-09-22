@@ -81,7 +81,7 @@ public class UserController {
 		return "redirect:/user/join";
 	}
 	
-	@RequestMapping(value="/ajaxIdChk", method=RequestMethod.POST)
+	@RequestMapping(value="/ajaxIdChk", method=RequestMethod.POST, produces="application/json; charset=utf-8")
 	@ResponseBody // 이 자체의 내용이 응답이란 것을 알림
 	public String ajaxIdChk(@RequestBody UserPARAM param) {
 		int result = service.login(param);

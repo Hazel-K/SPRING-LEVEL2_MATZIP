@@ -35,6 +35,7 @@ public class UserService {
 		param.setUser_pw(null);
 		param.setNm(dbUser.getNm());
 		param.setProfile_img(dbUser.getProfile_img());
+		param.setI_user(dbUser.getI_user());
 		return Const.SUCCESS;
 	}
 

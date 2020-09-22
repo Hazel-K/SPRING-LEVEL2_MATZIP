@@ -28,7 +28,7 @@ public class RestController {
 		return ViewRef.TYPE_1;
 	}
 	
-	@RequestMapping("/ajaxGetList")
+	@RequestMapping(value="/ajaxGetList", produces="application/json; charset=utf-8")
 	@ResponseBody
 	public String ajaxGetList(RestPARAM param) {
 //		System.out.println(param.getSw_lat());
@@ -46,7 +46,7 @@ public class RestController {
 	@RequestMapping(value="resReg", method=RequestMethod.POST)
 	public String resReg(RestPARAM param, HttpSession hs) {
 		UserPARAM user = (UserPARAM)hs.getAttribute(Const.LOGIN_USER);
-		System.out.println("iuser:" + user.getI_user());
+//		System.out.println("iuser:" + user.getI_user());
 		int result = service.insRest(param);
 		if(result == Const.SUCCESS) {
 			return "redirect:/restaurant/resReg";
