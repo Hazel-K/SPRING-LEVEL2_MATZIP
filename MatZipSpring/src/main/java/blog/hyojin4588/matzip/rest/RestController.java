@@ -36,14 +36,16 @@ public class RestController {
 		return service.selRestList(param);
 	}
 	
-	@RequestMapping(value="resReg", method=RequestMethod.GET)
+	@RequestMapping(value="/resReg", method=RequestMethod.GET)
 	public String resReg(Model model) {
+		model.addAttribute("categoryList", service.selCategoryList());
+		
 		model.addAttribute(Const.TITLE, "가게 등록");
 		model.addAttribute(Const.VIEW, "/restaurant/resReg");
 		return ViewRef.TYPE_1;
 	}
 	
-	@RequestMapping(value="resReg", method=RequestMethod.POST)
+	@RequestMapping(value="/resReg", method=RequestMethod.POST)
 	public String resReg(RestPARAM param, HttpSession hs) {
 		UserPARAM user = (UserPARAM)hs.getAttribute(Const.LOGIN_USER);
 //		System.out.println("iuser:" + user.getI_user());

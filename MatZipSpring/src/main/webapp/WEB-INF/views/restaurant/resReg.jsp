@@ -13,14 +13,12 @@
 			<input type="hidden" name="lng" value="0">
 			<input type="hidden" name="i_user" value="${loginUser.i_user}">
 			<div id="regGrid4">
-			<!-- 
 				<span>카테고리:</span>
 				<select name="cd_category" id="">
 					<c:forEach items="${categoryList}" var="item">
 						<option value="${item.cd}">${item.val}</option>
 					</c:forEach>
 				</select>
-			 -->
 			</div>
 			<div id="regGrid5"><input type="submit" value="등록"></div>
 		</form>

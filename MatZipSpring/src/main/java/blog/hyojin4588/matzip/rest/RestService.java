@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.google.gson.Gson;
 
+import blog.hyojin4588.matzip.model.CodeVO;
+import blog.hyojin4588.matzip.model.CommonMapper;
 import blog.hyojin4588.matzip.rest.model.RestDMI;
 import blog.hyojin4588.matzip.rest.model.RestPARAM;
 
@@ -15,6 +17,9 @@ public class RestService {
 
 	@Autowired
 	private RestMapper mapper;
+	
+	@Autowired
+	private CommonMapper cMapper;
 
 	String selRestList(RestPARAM param) {
 		List<RestDMI> list = mapper.selRestList(param);
@@ -27,6 +32,13 @@ public class RestService {
 	
 	int insRest(RestPARAM param) {
 		return mapper.insRest(param);
+	}
+	
+	List<CodeVO> selCategoryList() {
+		CodeVO p = new CodeVO();
+		p.setI_m(1);
+		
+		return cMapper.selCodeList(p);
 	}
 
 }
