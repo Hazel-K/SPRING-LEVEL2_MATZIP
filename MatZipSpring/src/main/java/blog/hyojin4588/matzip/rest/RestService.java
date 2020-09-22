@@ -21,13 +21,8 @@ public class RestService {
 	@Autowired
 	private CommonMapper cMapper;
 
-	String selRestList(RestPARAM param) {
-		List<RestDMI> list = mapper.selRestList(param);
-		if(list != null) {
-			Gson gson = new Gson();
-			return gson.toJson(list);
-		}
-		return "";
+	List<RestDMI> selRestList(RestPARAM param) {
+		return mapper.selRestList(param);
 	}
 	
 	int insRest(RestPARAM param) {

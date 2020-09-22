@@ -26,7 +26,13 @@
 	// 지도 표시 기능
 
 	// 지도 마커 기능
+	var markerList = [] // 마커리스트
+	
 	function getRestaurantList() {
+		markerList.forEach(function(marker) {
+			marker.setMap(null);
+		})
+		
 		const bounds = map.getBounds()
 		const south_west = bounds.getSouthWest()
 		const north_east = bounds.getNorthEast()
@@ -51,8 +57,7 @@
 		});
 	}
 	
-	kakao.maps.event.addListener(map, 'dragend', getRestaurantList)
-	kakao.maps.event.addListener(map, 'zoom_changed', getRestaurantList)
+	kakao.maps.event.addListener(map, 'tilesloaded', getRestaurantList)
 	// 지도 마커 기능
 	
 	// 마커 생성 함수
@@ -87,6 +92,7 @@
 		});
 		
 		marker.setMap(map);
+		markerList.push(marker) // 마커리스트에 저장
 	}
 	// 마커 생성 함수
 
