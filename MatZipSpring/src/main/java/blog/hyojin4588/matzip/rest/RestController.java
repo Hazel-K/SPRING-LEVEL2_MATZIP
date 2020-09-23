@@ -89,12 +89,8 @@ public class RestController {
 	@RequestMapping(value="/recMenus", method=RequestMethod.POST)
 	public String recMenus(MultipartHttpServletRequest mReq, RedirectAttributes ra) {
 //		System.out.println("/recMenus");
-		int i_rest = Integer.parseInt(mReq.getParameter("i_rest"));
-		List<MultipartFile> fileList = mReq.getFiles("menu_pic");
-		String[] menuNmArr = mReq.getParameterValues("menu_nm");
-		String[] priceArr = mReq.getParameterValues("menu_price");
 		
-		service.insRecMenus(i_rest, fileList, menuNmArr, priceArr);
+		int i_rest = service.insRecMenus(mReq);
 		
 		ra.addAttribute("i_rest", i_rest);
 		

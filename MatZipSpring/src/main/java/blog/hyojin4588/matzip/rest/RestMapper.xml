@@ -55,4 +55,11 @@
 		WHERE i_rest = #{i_rest}
 		AND i_user = #{i_user}
 	</delete>
+	<insert id="insRestRecMenu" parameterType="RestRecMenuVO">
+		INSERT INTO t_restaurant_recommend_menu
+		(i_rest, seq, menu_nm, menu_price, menu_pic)
+		SELECT #{i_rest}, IFNULL(max(seq), 0) + 1, #{menu_nm}, #{menu_price}, #{menu_pic}
+		FROM t_restaurant_recommend_menu
+		WHERE i_rest = #{i_rest}
+	</insert>
 </mapper>
