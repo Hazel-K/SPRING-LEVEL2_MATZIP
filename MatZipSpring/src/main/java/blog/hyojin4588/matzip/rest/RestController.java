@@ -64,9 +64,7 @@ public class RestController {
 	@RequestMapping(value="/resDetail", method=RequestMethod.GET)
 	public String resDetail(Model model, RestPARAM param) {
 		RestDMI data = service.selRest(param);
-		RestRecMenuVO recParam = new RestRecMenuVO();
-		recParam.setI_rest(param.getI_rest());
-		List<RestRecMenuVO> recList = service.selRestRecMenus(recParam);
+		List<RestRecMenuVO> recList = service.selRestRecMenus(param);
 		String[] cssList = { "resDetail" };
 		
 		model.addAttribute("css", cssList);
@@ -111,6 +109,15 @@ public class RestController {
 //			System.out.println("menuPrice : " + priceArr[i]);
 //		}
 		return "redirect:/restaurant/resDetail";
+	}
+	
+	@RequestMapping(value="/ajaxDelRecMenu", method=RequestMethod.GET)
+	@ResponseBody
+	public int ajaxDelRecMenu(RestPARAM param, HttpSession hs) {
+		param.setI_user(SecurityUtils.getLoginUserPk(hs));
+		String path = "resources/img/rest/" + param.getI_rest() + "/rec_menu/";
+		String realPath = hs.getServletContext().getRealPath(path);
+		return service.delRecMenu(param, realPath);
 	}
 
 }

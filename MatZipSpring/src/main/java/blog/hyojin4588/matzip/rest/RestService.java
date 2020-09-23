@@ -105,8 +105,26 @@ public class RestService {
 		return i_rest;
 	}
 	
-	public List<RestRecMenuVO> selRestRecMenus(RestRecMenuVO param) {
+	public List<RestRecMenuVO> selRestRecMenus(RestPARAM param) {
 		return mapper.selRecMenus(param);
+	}
+
+	public int delRecMenu(RestPARAM param, String realPath) {
+		List<RestRecMenuVO> list = mapper.selRecMenus(param);
+		if(list.size() == 1) {
+			RestRecMenuVO item = list.get(0);
+			if(!(item.getMenu_pic() != null) && !item.getMenu_pic().equals("")) {
+				File file = new File(realPath + item.getMenu_pic());
+				if (file.exists()) {
+					if (file.delete()) {
+						return mapper.delRestRecMenu(param);
+					} else {
+						return 0;
+					}
+				}
+			}
+		}
+		return mapper.delRestRecMenu(param);
 	}
 
 }
