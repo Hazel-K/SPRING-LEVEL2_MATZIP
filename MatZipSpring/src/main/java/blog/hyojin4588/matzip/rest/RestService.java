@@ -4,8 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.google.gson.Gson;
+import org.springframework.transaction.annotation.Transactional;
 
 import blog.hyojin4588.matzip.model.CodeVO;
 import blog.hyojin4588.matzip.model.CommonMapper;
@@ -38,6 +37,21 @@ public class RestService {
 	
 	public RestDMI selRest(RestPARAM param) {
 		return mapper.selRest(param);
+	}
+	
+	@Transactional // 롤백을 가능하게 해줌
+	public void delRestTran(RestPARAM param) {
+		mapper.delRestRecMenu(param); // 메소드를 넣을 경우, 컨트롤러의 try catch문을 제거
+		mapper.delRestMenu(param);
+		mapper.delRest(param);
+	}
+	
+	public int delRestRecMenu(RestPARAM param) {
+		return mapper.delRestRecMenu(param);
+	}
+	
+	public int delRestMenu(RestPARAM param) {
+		return mapper.delRestMenu(param);
 	}
 
 }

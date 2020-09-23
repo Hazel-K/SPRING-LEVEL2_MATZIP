@@ -149,7 +149,7 @@
 	addRecMenu()
 	function isDel() {
 		if(confirm('삭제 하시겠습니까?')) {
-			location.href = '/restaurant/restDel?i_rest=${data.i_rest}'
+			location.href = '/restaurant/del?i_rest=${data.i_rest}'
 		}
 	}
 </script>

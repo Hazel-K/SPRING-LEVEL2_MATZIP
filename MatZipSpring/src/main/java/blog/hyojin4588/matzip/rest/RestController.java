@@ -67,5 +67,20 @@ public class RestController {
 		model.addAttribute(Const.VIEW, "/restaurant/resDetail");
 		return ViewRef.TYPE_1;
 	}
+	
+	@RequestMapping(value="/del")
+	public String del(RestPARAM param, HttpSession hs) {
+		int loginI_user = SecurityUtils.getLoginUserPk(hs);
+		param.setI_user(loginI_user);
+		int result = 1;
+		
+		try {
+			service.delRestTran(param);
+		} catch(Exception e) {
+			result = 0;
+		}
+		
+		return "redirect:/";
+	}
 
 }
