@@ -62,7 +62,9 @@
 	<tx:annotation-driven transaction-manager="transactionManager"/>
 	
 	<!-- 파일업로드 -->
-	
+	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<beans:property name="maxUploadSize" value="5242880"></beans:property>
+	</beans:bean>
 	
 	<!-- 데이터 캐처 -->
 	<interceptors>

@@ -1,6 +1,6 @@
-package blog.hyojin4588.matzip.model;
+package blog.hyojin4588.matzip.rest.model;
 
-public class RestaurantRecommendMenuVO {
+public class RestRecMenuVO {
 	
 	private int i_rest;
 	private int seq;

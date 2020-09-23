@@ -10,6 +10,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import blog.hyojin4588.matzip.Const;
 import blog.hyojin4588.matzip.SecurityUtils;
@@ -81,6 +84,31 @@ public class RestController {
 		}
 		
 		return "redirect:/";
+	}
+	
+	@RequestMapping(value="/recMenus", method=RequestMethod.POST)
+	public String recMenus(MultipartHttpServletRequest mReq, RedirectAttributes ra) {
+//		System.out.println("/recMenus");
+		int i_rest = Integer.parseInt(mReq.getParameter("i_rest"));
+		List<MultipartFile> fileList = mReq.getFiles("menu_pic");
+		String[] menuNmArr = mReq.getParameterValues("menu_nm");
+		String[] priceArr = mReq.getParameterValues("menu_price");
+		
+		service.insRecMenus(i_rest, fileList, menuNmArr, priceArr);
+		
+		ra.addAttribute("i_rest", i_rest);
+		
+//		System.out.println("fileList.size() : " + fileList.size());
+//		for(MultipartFile file : fileList) {
+//			System.out.println("isEmpty : " + file.isEmpty());
+//			System.out.println("file : " + file.getOriginalFilename());
+//		}
+//		
+//		for(int i = 0; i < menuNmArr.length; i++) {
+//			System.out.println("menuNm : " + menuNmArr[i]);
+//			System.out.println("menuPrice : " + priceArr[i]);
+//		}
+		return "redirect:/restaurant/resDetail";
 	}
 
 }
