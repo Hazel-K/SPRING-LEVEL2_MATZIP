@@ -62,4 +62,9 @@
 		FROM t_restaurant_recommend_menu
 		WHERE i_rest = #{i_rest}
 	</insert>
+	<select id="selRecMenus" parameterType="RestRecMenuVO" resultType="RestRecMenuVO">
+		SELECT i_rest, seq, menu_nm, menu_price, menu_pic
+		FROM t_restaurant_recommend_menu
+		WHERE i_rest = #{i_rest}
+	</select>
 </mapper>

@@ -10,7 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -19,6 +18,7 @@ import blog.hyojin4588.matzip.SecurityUtils;
 import blog.hyojin4588.matzip.ViewRef;
 import blog.hyojin4588.matzip.rest.model.RestDMI;
 import blog.hyojin4588.matzip.rest.model.RestPARAM;
+import blog.hyojin4588.matzip.rest.model.RestRecMenuVO;
 
 @Controller
 @RequestMapping("/restaurant")
@@ -64,7 +64,13 @@ public class RestController {
 	@RequestMapping(value="/resDetail", method=RequestMethod.GET)
 	public String resDetail(Model model, RestPARAM param) {
 		RestDMI data = service.selRest(param);
+		RestRecMenuVO recParam = new RestRecMenuVO();
+		recParam.setI_rest(param.getI_rest());
+		List<RestRecMenuVO> recList = service.selRestRecMenus(recParam);
+		String[] cssList = { "resDetail" };
 		
+		model.addAttribute("css", cssList);
+		model.addAttribute("recMenuList", recList);
 		model.addAttribute("data", data);
 		model.addAttribute(Const.TITLE, data.getNm());
 		model.addAttribute(Const.VIEW, "/restaurant/resDetail");

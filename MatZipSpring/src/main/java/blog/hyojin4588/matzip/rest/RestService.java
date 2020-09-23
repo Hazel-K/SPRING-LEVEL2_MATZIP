@@ -104,5 +104,9 @@ public class RestService {
 		
 		return i_rest;
 	}
+	
+	public List<RestRecMenuVO> selRestRecMenus(RestRecMenuVO param) {
+		return mapper.selRecMenus(param);
+	}
 
 }
