@@ -75,7 +75,7 @@
 							</tr>
 							<tr>
 								<th>메뉴</th>
-								<td>	
+								<td>
 									<div class="menuList">
 									<c:if test="${fn:length(menuList) > 0}">
 										<c:forEach var="i" begin="0" end="${fn:length(menuList) > 3 ? 2 : fn:length(menuList) - 1}">
