@@ -116,7 +116,7 @@
 			}
 		}).then(function(res) {
 			console.log(res)
-			if(res.data.result == 1) {
+			if(res.data == 1) {
 				//엘리먼트 삭제
 				let ele = document.querySelector('#recMenuItem_' + seq)
 				ele.remove()
@@ -126,6 +126,7 @@
 	var idx = 0;
 	function addRecMenu() {
 		var div = document.createElement('div')
+		div.setAttribute('id', 'recMenu_' + idx++)
 		
 		var inputNm = document.createElement('input')
 		inputNm.setAttribute('type', 'text')
@@ -136,6 +137,11 @@
 		var inputPic = document.createElement('input')
 		inputPic.setAttribute('type', 'file')
 		inputPic.setAttribute('name', 'menu_pic')
+		var delBtn = document.createElement('button')
+		delBtn.setAttribute('value', 'X')
+		delBtn.addEventListener('click', function(e, idx) {
+			console.log('idx : ' + idx)
+		})
 		
 		div.append('메뉴: ')
 		div.append(inputNm)

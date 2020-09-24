@@ -73,7 +73,7 @@
 			ON A.i_rest = B.i_rest
 			AND B.i_user = ${i_user}
 		</if>
-		WHERE i_rest = #{i_rest}
+		WHERE A.i_rest = #{i_rest}
 		<if test="seq > 0">
 			AND A.seq = #{seq}
 		</if>

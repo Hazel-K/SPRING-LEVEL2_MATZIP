@@ -113,7 +113,7 @@ public class RestService {
 		List<RestRecMenuVO> list = mapper.selRecMenus(param);
 		if(list.size() == 1) {
 			RestRecMenuVO item = list.get(0);
-			if(!(item.getMenu_pic() != null) && !item.getMenu_pic().equals("")) {
+			if(item.getMenu_pic() != null && !item.getMenu_pic().equals("")) {
 				File file = new File(realPath + item.getMenu_pic());
 				if (file.exists()) {
 					if (file.delete()) {
