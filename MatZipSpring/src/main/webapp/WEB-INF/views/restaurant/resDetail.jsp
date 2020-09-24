@@ -80,7 +80,7 @@
 									<c:if test="${fn:length(menuList) > 0}">
 										<c:forEach var="i" begin="0" end="${fn:length(menuList) > 3 ? 2 : fn:length(menuList) - 1}">
 											<div class="menuItem">
-												<img src="/res/img/restaurant/${data.i_rest}/menu/${menuList[i].menu_pic}">
+												<img src="/resources/img/rest/${data.i_rest}/menu/${menuList[i].menu_pic}">
 											</div>
 										</c:forEach>
 									</c:if>

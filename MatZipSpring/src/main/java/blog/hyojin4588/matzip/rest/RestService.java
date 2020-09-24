@@ -170,4 +170,8 @@ public class RestService {
 		return false;
 	}
 
+	public List<RestRecMenuVO> selRestMenus(RestPARAM param) {
+		return mapper.selMenus(param);
+	}
+
 }

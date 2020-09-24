@@ -68,7 +68,9 @@ public class RestController {
 		RestDMI data = service.selRest(param);
 		List<RestRecMenuVO> recList = service.selRestRecMenus(param);
 		String[] cssList = { "resDetail" };
+		List<RestRecMenuVO> menuList = service.selRestMenus(param);
 		
+		model.addAttribute("menuList", menuList);
 		model.addAttribute("css", cssList);
 		model.addAttribute("recMenuList", recList);
 		model.addAttribute("data", data);

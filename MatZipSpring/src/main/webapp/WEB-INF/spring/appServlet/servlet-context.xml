@@ -72,6 +72,11 @@
 			<mapping path="/**"/>
 			<beans:bean class="blog.hyojin4588.matzip.LoginCheckInterceptor"/>
 		</interceptor>
+		
+		<interceptor>
+			<mapping path="/rest/*"/>
+			<beans:bean class="blog.hyojin4588.matzip.RestInterceptor"/>
+		</interceptor>
 	</interceptors>
 	
 </beans:beans>
