@@ -38,10 +38,18 @@
 }
 
 .menuList .menuItem {
-	display: inline-block;
+	position: relative;
 	width: 70px;
 	height: 70px;
 	color: white;
+}
+
+.menuList > .menuItem > .delIconContainer {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	cursor: pointer;
+	color: black;
 }
 
 .menuList .menuItem:not(:first-child) {
