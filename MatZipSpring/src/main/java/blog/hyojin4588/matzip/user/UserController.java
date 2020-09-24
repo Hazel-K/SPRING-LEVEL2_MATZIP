@@ -40,7 +40,7 @@ public class UserController {
 //		return "redirect:/user/login";
 		if (result == Const.SUCCESS) {
 			hs.setAttribute(Const.LOGIN_USER, param);
-			return "redirect:/restaurant/resMap";
+			return "redirect:/";
 		}
 
 		String msg = null;

@@ -3,17 +3,22 @@ package blog.hyojin4588.matzip;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import blog.hyojin4588.matzip.rest.model.RestPARAM;
+import blog.hyojin4588.matzip.rest.RestMapper;
 
 public class RestInterceptor extends HandlerInterceptorAdapter{
+	
+	@Autowired
+	private RestMapper mapper;
+	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		String uri = request.getRequestURI();
 		String[] uriArr = uri.split("/");
-		String[] checkKeyword = { "del", "Del", "upd" };
+		String[] checkKeyword = { "del", "Del", "upd", "Upd" };
 		
 		for(String word : checkKeyword) {
 			if(uriArr[2].contains(word)) {
@@ -32,8 +37,6 @@ public class RestInterceptor extends HandlerInterceptorAdapter{
 	}
 
 	private boolean _authSuccess(int i_rest, int i_user) {
-		RestPARAM param = new RestPARAM();
-		param.setI_rest(i_rest);
-		return false;
+		return i_user == mapper.selRestChkUser(i_rest);
 	}
 }
