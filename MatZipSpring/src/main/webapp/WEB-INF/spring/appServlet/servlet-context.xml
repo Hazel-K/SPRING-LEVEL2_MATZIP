@@ -74,7 +74,7 @@
 		</interceptor>
 		
 		<interceptor>
-			<mapping path="/rest/*"/>
+			<mapping path="/restaurant/*"/>
 			<beans:bean class="blog.hyojin4588.matzip.RestInterceptor"/>
 		</interceptor>
 	</interceptors>
