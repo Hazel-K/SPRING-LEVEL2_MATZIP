@@ -14,7 +14,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import blog.hyojin4588.matzip.CommonUtils;
+import blog.hyojin4588.matzip.Const;
 import blog.hyojin4588.matzip.FileUtils;
+import blog.hyojin4588.matzip.SecurityUtils;
 import blog.hyojin4588.matzip.model.CodeVO;
 import blog.hyojin4588.matzip.model.CommonMapper;
 import blog.hyojin4588.matzip.rest.model.RestDMI;
@@ -66,11 +68,17 @@ public class RestService {
 	}
 	
 	public int insRecMenus(MultipartHttpServletRequest mReq) {
+		int i_user = SecurityUtils.getLoginUserPk(mReq.getSession());
 		int i_rest = Integer.parseInt(mReq.getParameter("i_rest"));
+		if(_authFail(i_rest, i_user)) {
+			return Const.FAIL;
+		}
 		List<MultipartFile> fileList = mReq.getFiles("menu_pic");
 		String[] menuNmArr = mReq.getParameterValues("menu_nm");
 		String[] menuPriceArr = mReq.getParameterValues("menu_price");
-		String path = mReq.getServletContext().getRealPath("resources/img/rest/"+i_rest+"/rec_menu/");
+		
+		
+		String path = Const.REALPATH + "/resources/img/rest/" + i_rest + "/rec_menu/";
 
 		List<RestRecMenuVO> list = new ArrayList<RestRecMenuVO>();
 
@@ -86,19 +94,8 @@ public class RestService {
 			vo.setMenu_price(menu_price);
 
 			MultipartFile mf = fileList.get(i);
-
-			if(mf.isEmpty()) { continue; }
-
-			String originFileNm = mf.getOriginalFilename();
-			String ext = FileUtils.getExt(originFileNm);
-			String saveFileNm = UUID.randomUUID()+ext;
-
-			try {
-				mf.transferTo(new File(path + saveFileNm));
-				vo.setMenu_pic(saveFileNm);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			String saveFileNm = FileUtils.saveFile(path, mf);
+			vo.setMenu_pic(saveFileNm);
 		}
 		
 		for(RestRecMenuVO vo: list) {
@@ -132,39 +129,45 @@ public class RestService {
 
 	public int insMenus(RestFile param, HttpSession hs) {
 //		System.out.println("/Service.insMenus/");
-		String path = "resources/img/rest/" + param.getI_rest() + "/menu/";
-		String realPath = hs.getServletContext().getRealPath(path);
+		int i_user = SecurityUtils.getLoginUserPk(hs);
+		int i_rest = param.getI_rest();
+		if (_authFail(i_rest, i_user)) { // 유저가 맞지 않을 경우
+			return Const.FAIL;
+		}
+		
+		String path = Const.REALPATH +"resources/img/rest/" + param.getI_rest() + "/menu/";
 //		System.out.println("경로 : " + realPath);
 //		System.out.println("가게 ID : " + param.getI_rest());
-		
-		List<RestRecMenuVO> list = new ArrayList<RestRecMenuVO>();
 		if (param.getMenu_pic().size() != 0) {
 //			System.out.println("이미지 개수 : " + param.getMenu_pic().size());
 			for(MultipartFile file : param.getMenu_pic()) {
 				RestRecMenuVO vo = new RestRecMenuVO();
-				list.add(vo);
 				
 //				System.out.println("다음 파일이 비었나? " + file.isEmpty());
 				if(file.isEmpty()) { continue; }
 				
-				String originFileNm = file.getOriginalFilename();
-				String ext = FileUtils.getExt(originFileNm);
-				String saveFileNm = UUID.randomUUID() + ext;
+				String saveFileNm = FileUtils.saveFile(path, file);
 //				System.out.println("해당 파일 이름 : " + originFileNm);
 //				System.out.println("저장되는 파일 이름 : " + saveFileNm);
 				
-				try {
-					file.transferTo(new File(realPath + saveFileNm));
-					vo.setMenu_pic(saveFileNm);
-				} catch(Exception e) {
-					e.printStackTrace();
-				}
-				vo.setI_rest(param.getI_rest());				
+				vo.setMenu_pic(saveFileNm);
+				vo.setI_rest(param.getI_rest());
 				mapper.insMenu(vo);
 			}
 			return 1;
 		}
 		return 0;
+	}
+	
+	private boolean _authFail(int i_rest, int i_user) {
+		RestPARAM param = new RestPARAM();
+		param.setI_rest(i_rest);
+		
+		RestDMI dbResult = mapper.selRest(param);
+		if(dbResult == null || dbResult.getI_user() != i_user) {
+			return true;
+		}
+		return false;
 	}
 
 }

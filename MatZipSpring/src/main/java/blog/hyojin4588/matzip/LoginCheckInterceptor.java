@@ -20,7 +20,11 @@ public class LoginCheckInterceptor extends HandlerInterceptorAdapter{
 		String[] uriArr = uri.split("/");
 		boolean isLogout = SecurityUtils.isLogout(request);
 		
-		if("res".equals(uriArr[1])) {
+		if("/".equals(uri)) {
+			return true;
+		}
+		
+		if ("res".equals(uriArr[1])) {
 			return true;
 		} else if (uriArr.length < 3) { // 주소 이상한 경우
 			return false;
