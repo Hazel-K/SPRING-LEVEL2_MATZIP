@@ -152,7 +152,6 @@ public class RestService {
 				String saveFileNm = UUID.randomUUID() + ext;
 //				System.out.println("해당 파일 이름 : " + originFileNm);
 //				System.out.println("저장되는 파일 이름 : " + saveFileNm);
-				vo.setI_rest(param.getI_rest());
 				
 				try {
 					file.transferTo(new File(realPath + saveFileNm));
@@ -160,9 +159,7 @@ public class RestService {
 				} catch(Exception e) {
 					e.printStackTrace();
 				}
-			}
-			
-			for(RestRecMenuVO vo : list) {
+				vo.setI_rest(param.getI_rest());				
 				mapper.insMenu(vo);
 			}
 			return 1;
