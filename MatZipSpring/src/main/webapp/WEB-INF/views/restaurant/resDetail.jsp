@@ -138,9 +138,9 @@
 		inputPic.setAttribute('type', 'file')
 		inputPic.setAttribute('name', 'menu_pic')
 		var delBtn = document.createElement('button')
-		delBtn.setAttribute('value', 'X')
-		delBtn.addEventListener('click', function(e, idx) {
-			console.log('idx : ' + idx)
+		delBtn.innerText='X'
+		delBtn.addEventListener('click', function() {
+			div.remove()
 		})
 		
 		div.append('메뉴: ')
@@ -149,6 +149,7 @@
 		div.append(inputPrice)
 		div.append(' 사진: ')
 		div.append(inputPic)
+		div.append(delBtn)
 		
 		recItem.append(div)
 	}
