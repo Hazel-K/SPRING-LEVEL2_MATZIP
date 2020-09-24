@@ -41,7 +41,7 @@
 				
 				<h2>- 메뉴 -</h2>
 				<div>
-					<form id="menuFrm" action="/restaurant/#" enctype="multipart/form-data" method="post">
+					<form id="menuFrm" action="/restaurant/menus" enctype="multipart/form-data" method="post">
 						<input type="hidden" name="i_rest" value="${data.i_rest}">
 						<input type="file" name="menu_pic" multiple>
 						<div><input type="submit" value="등록"></div>

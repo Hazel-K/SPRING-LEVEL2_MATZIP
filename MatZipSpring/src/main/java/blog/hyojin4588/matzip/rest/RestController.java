@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -17,6 +18,7 @@ import blog.hyojin4588.matzip.Const;
 import blog.hyojin4588.matzip.SecurityUtils;
 import blog.hyojin4588.matzip.ViewRef;
 import blog.hyojin4588.matzip.rest.model.RestDMI;
+import blog.hyojin4588.matzip.rest.model.RestFile;
 import blog.hyojin4588.matzip.rest.model.RestPARAM;
 import blog.hyojin4588.matzip.rest.model.RestRecMenuVO;
 
@@ -118,6 +120,17 @@ public class RestController {
 		String path = "resources/img/rest/" + param.getI_rest() + "/rec_menu/";
 		String realPath = hs.getServletContext().getRealPath(path);
 		return service.delRecMenu(param, realPath);
+	}
+	
+	@RequestMapping(value="/menus", method=RequestMethod.POST)
+	public String menus(@ModelAttribute RestFile param, RedirectAttributes ra, HttpSession hs) {
+//		for(MultipartFile file : param.getMenu_pic()) {
+//			System.out.println("fileNm : " + file.getOriginalFilename());
+//		}
+		int result = service.insMenus(param, hs);
+//		System.out.println(result);
+		ra.addAttribute("i_rest", param.getI_rest());
+		return "redirect:/restaurant/resDetail?i_rest=" + param.getI_rest();
 	}
 
 }

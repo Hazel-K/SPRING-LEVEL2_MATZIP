@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,6 +18,7 @@ import blog.hyojin4588.matzip.FileUtils;
 import blog.hyojin4588.matzip.model.CodeVO;
 import blog.hyojin4588.matzip.model.CommonMapper;
 import blog.hyojin4588.matzip.rest.model.RestDMI;
+import blog.hyojin4588.matzip.rest.model.RestFile;
 import blog.hyojin4588.matzip.rest.model.RestPARAM;
 import blog.hyojin4588.matzip.rest.model.RestRecMenuVO;
 
@@ -88,11 +91,11 @@ public class RestService {
 
 			String originFileNm = mf.getOriginalFilename();
 			String ext = FileUtils.getExt(originFileNm);
-			String savaFileNm = UUID.randomUUID()+ext;
+			String saveFileNm = UUID.randomUUID()+ext;
 
 			try {
-				mf.transferTo(new File(path + savaFileNm));
-				vo.setMenu_pic(savaFileNm);
+				mf.transferTo(new File(path + saveFileNm));
+				vo.setMenu_pic(saveFileNm);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -125,6 +128,46 @@ public class RestService {
 			}
 		}
 		return mapper.delRestRecMenu(param);
+	}
+
+	public int insMenus(RestFile param, HttpSession hs) {
+//		System.out.println("/Service.insMenus/");
+		String path = "resources/img/rest/" + param.getI_rest() + "/menu/";
+		String realPath = hs.getServletContext().getRealPath(path);
+//		System.out.println("경로 : " + realPath);
+//		System.out.println("가게 ID : " + param.getI_rest());
+		
+		List<RestRecMenuVO> list = new ArrayList<RestRecMenuVO>();
+		if (param.getMenu_pic().size() != 0) {
+//			System.out.println("이미지 개수 : " + param.getMenu_pic().size());
+			for(MultipartFile file : param.getMenu_pic()) {
+				RestRecMenuVO vo = new RestRecMenuVO();
+				list.add(vo);
+				
+//				System.out.println("다음 파일이 비었나? " + file.isEmpty());
+				if(file.isEmpty()) { continue; }
+				
+				String originFileNm = file.getOriginalFilename();
+				String ext = FileUtils.getExt(originFileNm);
+				String saveFileNm = UUID.randomUUID() + ext;
+//				System.out.println("해당 파일 이름 : " + originFileNm);
+//				System.out.println("저장되는 파일 이름 : " + saveFileNm);
+				vo.setI_rest(param.getI_rest());
+				
+				try {
+					file.transferTo(new File(realPath + saveFileNm));
+					vo.setMenu_pic(saveFileNm);
+				} catch(Exception e) {
+					e.printStackTrace();
+				}
+			}
+			
+			for(RestRecMenuVO vo : list) {
+				mapper.insMenu(vo);
+			}
+			return 1;
+		}
+		return 0;
 	}
 
 }

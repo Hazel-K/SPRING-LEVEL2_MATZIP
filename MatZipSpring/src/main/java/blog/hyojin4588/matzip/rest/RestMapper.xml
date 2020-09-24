@@ -78,4 +78,11 @@
 			AND A.seq = #{seq}
 		</if>
 	</select>
+	<insert id="insMenu" parameterType="RestRecMenuVO">
+		INSERT INTO t_restaurant_menu
+		(i_rest, seq, menu_pic)
+		SELECT #{i_rest}, IFNULL(max(seq), 0) + 1, #{menu_pic}
+		FROM t_restaurant_menu
+		WHERE i_rest = #{i_rest}
+	</insert>
 </mapper>
