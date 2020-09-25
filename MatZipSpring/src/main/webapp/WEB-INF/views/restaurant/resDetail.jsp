@@ -192,7 +192,7 @@
 						if(res.data == 1) {
 							menuList.splice(idx, 1)
 							swiper.removeSlide(idx)
-							refreshMenu()							
+							refreshMenu()
 						} else {
 							alert('메뉴를 삭제할 수 없습니다.')
 						}
