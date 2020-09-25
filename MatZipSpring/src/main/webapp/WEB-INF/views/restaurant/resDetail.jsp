@@ -165,7 +165,9 @@
 		const img = document.createElement('img')
 		img.src = `/resources/img/rest/${data.i_rest}/menu/\${item.menu_pic}`
 		img.style.cursor = 'pointer'
-		img.addEventListener('click', openCarousel)
+		img.addEventListener('click', function() {
+			openCarousel(idx + 1)
+		})
 		
 		div.append(img)
 		
@@ -276,10 +278,13 @@
 	
 	var swiper = new Swiper('.swiper-container', {
 	  loop: true,
-      navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-      },
+	  navigation: {
+	    nextEl: '.swiper-button-next',
+	    prevEl: '.swiper-button-prev',
+	  },
+	  pagination: {
+	    el: '.swiper-pagination'
+	  },
     });
 	
 	function closeCarousel() {
@@ -287,7 +292,8 @@
 		carouselContainer.style.zIndex = -10
 	}
 	
-	function openCarousel() {
+	function openCarousel(idx) {
+		swiper.slideTo(idx)
 		carouselContainer.style.opacity = 1
 		carouselContainer.style.zIndex = 40
 	}
