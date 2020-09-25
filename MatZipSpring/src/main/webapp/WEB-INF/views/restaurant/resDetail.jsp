@@ -123,17 +123,7 @@
 <div id="carouselContainer">
 	<div id="imgContainer">
 		<div class="swiper-container">
-			<div class="swiper-wrapper">
-				<div class="swiper-slide">Slide 1</div>
-				<div class="swiper-slide">Slide 2</div>
-				<div class="swiper-slide">Slide 3</div>
-				<div class="swiper-slide">Slide 4</div>
-				<div class="swiper-slide">Slide 5</div>
-				<div class="swiper-slide">Slide 6</div>
-				<div class="swiper-slide">Slide 7</div>
-				<div class="swiper-slide">Slide 8</div>
-				<div class="swiper-slide">Slide 9</div>
-				<div class="swiper-slide">Slide 10</div>
+			<div id="swiper-wrapper" class="swiper-wrapper">
 			</div>
 			<!-- Add Arrows -->
 			<div class="swiper-button-next"></div>
@@ -141,7 +131,7 @@
 		</div>
 	</div>
 	<div>
-		<span class="material-icons">clear</span>
+		<span class="material-icons" onclick="closeCarousel()">clear</span>
 	</div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -171,12 +161,20 @@
 
 	function makeMenuItem(item, idx) {
 		const div = document.createElement('div')
-		div.className = 'menuItem'
-	
+		div.className = 'menuItem'	
 		const img = document.createElement('img')
 		img.src = `/resources/img/rest/${data.i_rest}/menu/\${item.menu_pic}`
-	
+		img.style.cursor = 'pointer'
+		img.addEventListener('click', openCarousel)
+		
 		div.append(img)
+		
+		const swiperDiv = document.createElement('div')
+		swiperDiv.className = 'swiper-slide'
+		const swiperImg = document.createElement('img')
+		swiperImg.src = `/resources/img/rest/${data.i_rest}/menu/\${item.menu_pic}`
+		
+		swiperDiv.append(swiperImg)
 	
 		<c:if test="${loginUser.i_user == data.i_user}">
 			const delDiv = document.createElement('div')
@@ -193,6 +191,7 @@
 					}).then(function(res) {
 						if(res.data == 1) {
 							menuList.splice(idx, 1)
+							swiper.removeSlide(idx)
 							refreshMenu()							
 						} else {
 							alert('메뉴를 삭제할 수 없습니다.')
@@ -211,6 +210,7 @@
 		</c:if>
 		
 		conMenuList.append(div)
+		swiper.addSlide(idx, swiperDiv)
 	}
 
 	function delRecMenu(seq) {
@@ -275,9 +275,20 @@
 	ajaxSelMenuList()
 	
 	var swiper = new Swiper('.swiper-container', {
+	  loop: true,
       navigation: {
         nextEl: '.swiper-button-next',
         prevEl: '.swiper-button-prev',
       },
     });
+	
+	function closeCarousel() {
+		carouselContainer.style.opacity = 0
+		carouselContainer.style.zIndex = -10
+	}
+	
+	function openCarousel() {
+		carouselContainer.style.opacity = 1
+		carouselContainer.style.zIndex = 40
+	}
 </script>
