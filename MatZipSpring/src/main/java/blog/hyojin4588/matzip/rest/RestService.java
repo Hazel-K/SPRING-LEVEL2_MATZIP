@@ -64,6 +64,14 @@ public class RestService {
 	}
 	
 	public int delRestMenu(RestPARAM param) {
+		if(param.getMenu_pic() != null && !"".equals(param.getMenu_pic())) {
+			String path = Const.REALPATH + "resources/img/rest/" + param.getI_rest() + "/menu/";
+			if(FileUtils.delFile(path + param.getMenu_pic())) {
+				return mapper.delRestMenu(param);
+			} else {
+				return Const.FAIL;
+			}
+		}
 		return mapper.delRestMenu(param);
 	}
 	

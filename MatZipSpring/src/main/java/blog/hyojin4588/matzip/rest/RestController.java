@@ -87,8 +87,8 @@ public class RestController {
 	
 	@RequestMapping("/ajaxDelMenu")
 	@ResponseBody
-	public int ajaxDelMenu(RestPARAM param) {
-		// 사전 조건 - 로그인한 유저냐? Restinterceptor에서 처리
+	public int ajaxDelMenu(RestPARAM param) { // i_rest, seq, menu_pic
+		// 사전 조건 - 로그인한 유저냐? RestInterceptor에서 처리
 		// 사전 조건 - 해당 자료 저장된 path는 어디냐? root Controller에서 처리
 		return service.delRestMenu(param);
 	}
