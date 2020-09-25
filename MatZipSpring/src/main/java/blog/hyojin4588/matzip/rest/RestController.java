@@ -85,6 +85,14 @@ public class RestController {
 		return service.selRestMenus(param);
 	}
 	
+	@RequestMapping("/ajaxDelMenu")
+	@ResponseBody
+	public int ajaxDelMenu(RestPARAM param) {
+		// 사전 조건 - 로그인한 유저냐? Restinterceptor에서 처리
+		// 사전 조건 - 해당 자료 저장된 path는 어디냐? root Controller에서 처리
+		return service.delRestMenu(param);
+	}
+	
 	@RequestMapping(value="/del")
 	public String del(RestPARAM param, HttpSession hs) {
 		int loginI_user = SecurityUtils.getLoginUserPk(hs);
@@ -127,7 +135,7 @@ public class RestController {
 		param.setI_user(SecurityUtils.getLoginUserPk(hs));
 		String path = "resources/img/rest/" + param.getI_rest() + "/rec_menu/";
 		String realPath = hs.getServletContext().getRealPath(path);
-		return service.delRecMenu(param, realPath);
+		return service.delRestRecMenu(param, realPath);
 	}
 	
 	@RequestMapping(value="/menus", method=RequestMethod.POST)

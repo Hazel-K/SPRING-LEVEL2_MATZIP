@@ -109,7 +109,7 @@ public class RestService {
 		return mapper.selRecMenus(param);
 	}
 
-	public int delRecMenu(RestPARAM param, String realPath) {
+	public int delRestRecMenu(RestPARAM param, String realPath) {
 		List<RestRecMenuVO> list = mapper.selRecMenus(param);
 		if(list.size() == 1) {
 			RestRecMenuVO item = list.get(0);

@@ -15,7 +15,8 @@ public class RestInterceptor extends HandlerInterceptorAdapter{
 	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
-			throws Exception {
+			throws Exception { // preHandle은 controller가기 전 실행
+		
 		String uri = request.getRequestURI();
 		String[] uriArr = uri.split("/");
 		String[] checkKeyword = { "del", "Del", "upd", "Upd" };
@@ -26,7 +27,7 @@ public class RestInterceptor extends HandlerInterceptorAdapter{
 				if(i_rest == 0) {
 					return false;
 				}
-				int i_user = SecurityUtils.getLoginUserPk(request);
+				int i_user = SecurityUtils.getLoginUserPk(request); // 로그인한 사람의 i_user
 				
 				boolean result = _authSuccess(i_rest,i_user);
 				return result;

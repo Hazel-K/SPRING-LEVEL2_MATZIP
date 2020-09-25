@@ -146,6 +146,9 @@
 			delDiv.className = 'delIconContainer'
 			delDiv.addEventListener('click', function() {
 				if(idx > -1) {
+					// 서버 삭제 요청
+					
+					
 					menuList.splice(idx, 1)
 					refreshMenu()
 				}
