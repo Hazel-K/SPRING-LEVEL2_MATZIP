@@ -68,15 +68,21 @@ public class RestController {
 		RestDMI data = service.selRest(param);
 		List<RestRecMenuVO> recList = service.selRestRecMenus(param);
 		String[] cssList = { "resDetail" };
-		List<RestRecMenuVO> menuList = service.selRestMenus(param);
+		// List<RestRecMenuVO> menuList = service.selRestMenus(param);
 		
-		model.addAttribute("menuList", menuList);
+		// model.addAttribute("menuList", menuList);
 		model.addAttribute("css", cssList);
 		model.addAttribute("recMenuList", recList);
 		model.addAttribute("data", data);
 		model.addAttribute(Const.TITLE, data.getNm());
 		model.addAttribute(Const.VIEW, "/restaurant/resDetail");
 		return ViewRef.TYPE_1;
+	}
+	
+	@RequestMapping("/ajaxSelMenuList")
+	@ResponseBody
+	public List<RestRecMenuVO> ajaxSelMenuList(RestPARAM param) {
+		return service.selRestMenus(param);
 	}
 	
 	@RequestMapping(value="/del")

@@ -76,7 +76,8 @@
 							<tr>
 								<th>메뉴</th>
 								<td>
-									<div class="menuList">
+									<div class="menuList" id="conMenuList">
+									<!-- 
 									<c:if test="${fn:length(menuList) > 0}">
 										<c:forEach var="i" begin="0" end="${fn:length(menuList) > 3 ? 2 : fn:length(menuList) - 1}">
 											<div class="menuItem">
@@ -96,6 +97,7 @@
 												</div>
 											</div>
 										</c:if>
+										 -->
 									</div>
 								</td>
 							</tr>
@@ -108,6 +110,58 @@
 </div>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
+
+	var isMe = ${loginUser.i_user == data.i_user}
+	var menuList = []
+	
+	function ajaxSelMenuList() {
+		axios.get('/restaurant/ajaxSelMenuList', {
+			params: {
+				i_rest: ${data.i_rest}
+			}
+		}).then(function(res) {
+			menuList = res.data
+			refreshMenu()
+		})
+	}
+
+	function refreshMenu() {
+		conMenuList.innerHTML = ''
+		menuList.forEach(function(item, idx) {
+			makeMenuItem(item, idx)
+		})
+	}
+
+	function makeMenuItem(item, idx) {
+		const div = document.createElement('div')
+		div.className = 'menuItem'
+	
+		const img = document.createElement('img')
+		img.src = `/resources/img/rest/${data.i_rest}/menu/\${item.menu_pic}`
+	
+		div.append(img)
+	
+		<c:if test="${loginUser.i_user == data.i_user}">
+			const delDiv = document.createElement('div')
+			delDiv.className = 'delIconContainer'
+			delDiv.addEventListener('click', function() {
+				if(idx > -1) {
+					menuList.splice(idx, 1)
+					refreshMenu()
+				}
+			})
+		
+			const span = document.createElement('span')
+			span.className = 'material-icons'
+			span.innerText = 'clear'
+		
+			delDiv.append(span)
+			div.append(delDiv)
+		</c:if>
+		
+		conMenuList.append(div)
+	}
+
 	function delRecMenu(seq) {
 		if(!confirm('삭제하시겠습니까?')) {
 			return
@@ -128,6 +182,7 @@
 			}
 		})
 	}
+	<c:if test="${loginUser.i_user == data.i_user}">
 	var idx = 0;
 	function addRecMenu() {
 		var div = document.createElement('div')
@@ -164,4 +219,7 @@
 			location.href = '/restaurant/del?i_rest=${data.i_rest}'
 		}
 	}
+	</c:if>
+	
+	ajaxSelMenuList()
 </script>
