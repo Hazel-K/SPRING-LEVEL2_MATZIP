@@ -1,20 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <div>
 	<div class="recMenuContainer">
 		<c:forEach items="${recMenuList}" var="item">
 			<div class="recMenuItem" id="recMenuItem_${item.seq}">
 				<div class="pic">
 					<c:if test="${item.menu_pic != null and item.menu_pic != ''}">
-						<img src="/resources/img/rest/${data.i_rest}/rec_menu/${item.menu_pic}">
+						<img
+							src="/resources/img/rest/${data.i_rest}/rec_menu/${item.menu_pic}">
 					</c:if>
 				</div>
 				<div class="info">
 					<div class="nm">${item.menu_nm}</div>
-					<div class="price"><fmt:formatNumber type="number" value="${item.menu_price}"/>원</div>
+					<div class="price">
+						<fmt:formatNumber type="number" value="${item.menu_price}" />
+						원
+					</div>
 				</div>
 				<c:if test="${loginUser.i_user == data.i_user}">
 					<div class="delIconContainer" onclick="delRecMenu(${item.seq})">
@@ -28,27 +32,35 @@
 		<div>
 			<c:if test="${loginUser.i_user == data.i_user}">
 				<button onclick="isDel()">가게 삭제</button>
-				
+
 				<h2>- 추천 메뉴 -</h2>
 				<div>
-					<div><button type="button" onclick="addRecMenu()">추천 메뉴 추가</button></div>
-					<form id="recFrm" action="/restaurant/recMenus" enctype="multipart/form-data" method="post">
+					<div>
+						<button type="button" onclick="addRecMenu()">추천 메뉴 추가</button>
+					</div>
+					<form id="recFrm" action="/restaurant/recMenus"
+						enctype="multipart/form-data" method="post">
 						<input type="hidden" name="i_rest" value="${data.i_rest}">
 						<div id="recItem"></div>
-						<div><input type="submit" value="등록"></div>
+						<div>
+							<input type="submit" value="등록">
+						</div>
 					</form>
 				</div>
-				
+
 				<h2>- 메뉴 -</h2>
 				<div>
-					<form id="menuFrm" action="/restaurant/menus" enctype="multipart/form-data" method="post">
+					<form id="menuFrm" action="/restaurant/menus"
+						enctype="multipart/form-data" method="post">
 						<input type="hidden" name="i_rest" value="${data.i_rest}">
 						<input type="file" name="menu_pic" multiple>
-						<div><input type="submit" value="등록"></div>
+						<div>
+							<input type="submit" value="등록">
+						</div>
 					</form>
 				</div>
 			</c:if>
-			
+
 			<div class="restaurant-detail">
 				<div id="detail-header">
 					<div class="restaurant_title_wrap">
@@ -57,8 +69,8 @@
 						</span>
 					</div>
 					<div class="status branch_none">
-						<span class="cnt hit">${data.hits}</span>
-						<span class="cnt favorite">${data.cnt_favorite}</span>
+						<span class="cnt hit">${data.hits}</span> <span
+							class="cnt favorite">${data.cnt_favorite}</span>
 					</div>
 				</div>
 				<div>
@@ -77,7 +89,7 @@
 								<th>메뉴</th>
 								<td>
 									<div class="menuList" id="conMenuList">
-									<!-- 
+										<!-- 
 									<c:if test="${fn:length(menuList) > 0}">
 										<c:forEach var="i" begin="0" end="${fn:length(menuList) > 3 ? 2 : fn:length(menuList) - 1}">
 											<div class="menuItem">
@@ -108,7 +120,32 @@
 		</div>
 	</div>
 </div>
+<div id="carouselContainer">
+	<div id="imgContainer">
+		<div class="swiper-container">
+			<div class="swiper-wrapper">
+				<div class="swiper-slide">Slide 1</div>
+				<div class="swiper-slide">Slide 2</div>
+				<div class="swiper-slide">Slide 3</div>
+				<div class="swiper-slide">Slide 4</div>
+				<div class="swiper-slide">Slide 5</div>
+				<div class="swiper-slide">Slide 6</div>
+				<div class="swiper-slide">Slide 7</div>
+				<div class="swiper-slide">Slide 8</div>
+				<div class="swiper-slide">Slide 9</div>
+				<div class="swiper-slide">Slide 10</div>
+			</div>
+			<!-- Add Arrows -->
+			<div class="swiper-button-next"></div>
+			<div class="swiper-button-prev"></div>
+		</div>
+	</div>
+	<div>
+		<span class="material-icons">clear</span>
+	</div>
+</div>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 <script>
 
 	var isMe = ${loginUser.i_user == data.i_user}
@@ -236,4 +273,11 @@
 	</c:if>
 	
 	ajaxSelMenuList()
+	
+	var swiper = new Swiper('.swiper-container', {
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    });
 </script>

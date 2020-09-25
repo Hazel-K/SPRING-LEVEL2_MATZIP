@@ -26,6 +26,7 @@
 ##### 13. jbcrypt, https://mvnrepository.com/artifact/org.mindrot/jbcrypt
 ##### 14. commons-io, https://mvnrepository.com/artifact/commons-io/commons-io
 ##### 15. commons-fileupload, https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload
+##### 16. swiper, css&js, https://swiperjs.com/get-started/
 
 ### 패치 내역
 #### 20.09.17
@@ -38,3 +39,9 @@
 #### 20.09.22
 ##### 마커 등록 및 표시
 ##### 가게 등록 및 정보 표시
+
+#### 20.09.23
+##### 추천 메뉴 등록 및 삭제 구현
+
+#### 20.09.25
+##### 메뉴 등록 및 삭제 구현
