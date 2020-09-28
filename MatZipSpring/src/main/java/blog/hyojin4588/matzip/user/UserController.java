@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import blog.hyojin4588.matzip.Const;
+import blog.hyojin4588.matzip.SecurityUtils;
 import blog.hyojin4588.matzip.ViewRef;
 import blog.hyojin4588.matzip.user.model.UserPARAM;
 import blog.hyojin4588.matzip.user.model.UserVO;
@@ -92,6 +93,14 @@ public class UserController {
 	public String ajaxIdChk(@RequestBody UserPARAM param) {
 		int result = service.login(param);
 		return String.valueOf(result);
+	}
+	
+	@RequestMapping(value="/ajaxToggleFavorite", method=RequestMethod.GET)
+	@ResponseBody
+	public int ajaxToggleFavorite(UserPARAM param, HttpSession hs) {
+		int i_user = SecurityUtils.getLoginUserPk(hs);
+		param.setI_user(i_user);
+		return service.ajaxToggleFavorite(param);
 	}
 
 }

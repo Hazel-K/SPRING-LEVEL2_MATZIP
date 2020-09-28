@@ -3,8 +3,9 @@ package blog.hyojin4588.matzip.rest;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -182,4 +183,18 @@ public class RestService {
 		return mapper.selMenus(param);
 	}
 
+	public void addHits(RestPARAM param, HttpServletRequest req) {
+		String myIp = req.getRemoteAddr();
+		ServletContext ctx = req.getServletContext();
+		
+		int i_user = SecurityUtils.getLoginUserPk(req);
+		
+		String currentRestReadIp = (String)ctx.getAttribute(Const.CURRNET_REST_READ_IP + param.getI_rest());
+		if(currentRestReadIp == null || !"".equals(currentRestReadIp)) {
+			param.setI_user(i_user);
+			mapper.updAddHits(param);
+			ctx.setAttribute(Const.CURRNET_REST_READ_IP + param.getI_rest(), myIp);
+		}
+	}
+	
 }

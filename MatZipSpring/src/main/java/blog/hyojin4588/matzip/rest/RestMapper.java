@@ -22,5 +22,6 @@ public interface RestMapper {
 	int delRestRecMenu(RestPARAM p);
 	int delRestMenu(RestPARAM p);
 	int selRestChkUser(int p);
+	int updAddHits(RestPARAM p);
 
 }

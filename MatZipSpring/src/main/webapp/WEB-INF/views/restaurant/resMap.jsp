@@ -68,9 +68,13 @@
 	    leftSpan.className = 'left';
 	    var rightSpan = document. createElement('span');
 	    rightSpan.className = 'right';
+	    var restNm = item.nm
+	    if(item.is_favorite == 1) {
+	    	restNm += ' ♥'
+	    }
 	    var centerSpan = document. createElement('span');
 	    centerSpan.className = 'center';
-	    centerSpan.innerText = item.nm;
+	    centerSpan.innerText = restNm;
 
 	    content.append(leftSpan);
 	    content.append(centerSpan);
@@ -128,9 +132,9 @@
 	  
 		var startPos;
 		navigator.geolocation.getCurrentPosition(function(pos) {
-		startPos = pos			  
+		startPos = pos
 //		console.log('lat : ' + startPos.coords.latitude)
-//		console.log('lng : ' + startPos.coords.longitude)	    
+//		console.log('lng : ' + startPos.coords.longitude)
 			if(map) {
 			    var moveLatLon = new kakao.maps.LatLng(startPos.coords.latitude, startPos.coords.longitude)
 			    map.panTo(moveLatLon)

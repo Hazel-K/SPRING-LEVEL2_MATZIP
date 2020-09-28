@@ -36,7 +36,8 @@ public class SecurityUtils {
 	
 	// 로그인한 사람의 id번호를 가져오는 메소드
 	public static int getLoginUserPk(HttpServletRequest request) {
-		return getLoginUser(request).getI_user();
+		UserVO loginUser = getLoginUser(request);
+		return loginUser == null ? 0 : loginUser.getI_user();
 	}
 	
 	public static int getLoginUserPk(HttpSession hs) {

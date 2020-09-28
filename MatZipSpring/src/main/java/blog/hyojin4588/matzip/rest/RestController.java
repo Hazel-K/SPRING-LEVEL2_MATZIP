@@ -2,6 +2,7 @@ package blog.hyojin4588.matzip.rest;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,9 +39,12 @@ public class RestController {
 	
 	@RequestMapping(value="/ajaxGetList")
 	@ResponseBody
-	public List<RestDMI> ajaxGetList(RestPARAM param) { // vo의 형태로 주고받더라도 json으로 parse는 자동(현재 Spring 기능에 포함)
+	public List<RestDMI> ajaxGetList(RestPARAM param, HttpSession hs) { // vo의 형태로 주고받더라도 json으로 parse는 자동(현재 Spring 기능에 포함)
 //		System.out.println(param.getSw_lat());
 //		System.out.println(param.getNe_lng());
+		int i_user = SecurityUtils.getLoginUserPk(hs);
+		param.setI_user(i_user);
+		
 		return service.selRestList(param);
 	}
 	
@@ -64,11 +68,15 @@ public class RestController {
 	}
 	
 	@RequestMapping(value="/resDetail", method=RequestMethod.GET)
-	public String resDetail(Model model, RestPARAM param) {
+	public String resDetail(Model model, RestPARAM param, HttpServletRequest req) {
+		int i_user = SecurityUtils.getLoginUserPk(req);
+		param.setI_user(i_user);
 		RestDMI data = service.selRest(param);
 		List<RestRecMenuVO> recList = service.selRestRecMenus(param);
 		String[] cssList = { "resDetail", "swiper-bundle" };
 		// List<RestRecMenuVO> menuList = service.selRestMenus(param);
+		
+		service.addHits(param, req);
 		
 		// model.addAttribute("menuList", menuList);
 		model.addAttribute("css", cssList);

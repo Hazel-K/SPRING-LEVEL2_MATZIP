@@ -15,4 +15,17 @@
 		<if test="i_user > 0"> i_user = #{i_user}</if>
 		<if test="user_id != null and user_id != ''"> user_id = #{user_id}</if>
 	</select>
+	
+	<insert id="insFavorite" parameterType="UserPARAM">
+		INSERT INTO t_user_favorite
+		(i_user, i_rest)
+		VALUES
+		(#{i_user}, #{i_rest})
+	</insert>
+	
+	<delete id="delFavorite" parameterType="UserPARAM">
+		DELETE FROM t_user_favorite
+		WHERE i_user = #{i_user}
+		AND i_rest = #{i_rest}
+	</delete>
 </mapper>
