@@ -1,14 +1,15 @@
 package blog.hyojin4588.matzip.user;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import blog.hyojin4588.matzip.Const;
 import blog.hyojin4588.matzip.SecurityUtils;
+import blog.hyojin4588.matzip.rest.RestMapper;
+import blog.hyojin4588.matzip.rest.model.RestPARAM;
+import blog.hyojin4588.matzip.rest.model.RestRecMenuVO;
 import blog.hyojin4588.matzip.user.model.UserDMI;
 import blog.hyojin4588.matzip.user.model.UserPARAM;
 import blog.hyojin4588.matzip.user.model.UserVO;
@@ -18,6 +19,9 @@ public class UserService {
 
 	@Autowired
 	private UserMapper mapper;
+	
+	@Autowired
+	private RestMapper restMapper;
 
 	// 1: 로그인 성공, 2: 아이디 없음, 3: 비밀번호 틀림
 	public int login(UserPARAM param) {
@@ -57,6 +61,18 @@ public class UserService {
 			return mapper.delFavorite(param);
 		}
 		return 0;
+	}
+	
+	public List<UserDMI> selFavoriteList(UserPARAM param) {
+		List<UserDMI> list = mapper.selFavoriteList(param);
+		for(UserDMI vo : list) {
+			RestPARAM param2 = new RestPARAM();
+			param2.setI_rest(vo.getI_rest());
+			
+			List<RestRecMenuVO> eachRecMenuList = restMapper.selRecMenus(param2);
+			vo.setMenuList(eachRecMenuList);
+		}
+		return list;
 	}
 
 }
