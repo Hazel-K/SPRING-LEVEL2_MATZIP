@@ -11,4 +11,5 @@ public class Const {
 	public static final int NO_PW = 3;
 	public static final int FAIL = -1;
 	public static final String CURRNET_REST_READ_IP = "currentUserRest_";
+	public static final String CSS = "css";
 }

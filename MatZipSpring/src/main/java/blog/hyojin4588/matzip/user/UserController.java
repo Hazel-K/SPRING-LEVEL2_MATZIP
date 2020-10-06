@@ -1,5 +1,7 @@
 package blog.hyojin4588.matzip.user;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import blog.hyojin4588.matzip.Const;
 import blog.hyojin4588.matzip.SecurityUtils;
 import blog.hyojin4588.matzip.ViewRef;
+import blog.hyojin4588.matzip.user.model.UserDMI;
 import blog.hyojin4588.matzip.user.model.UserPARAM;
 import blog.hyojin4588.matzip.user.model.UserVO;
 
@@ -101,6 +104,19 @@ public class UserController {
 		int i_user = SecurityUtils.getLoginUserPk(hs);
 		param.setI_user(i_user);
 		return service.ajaxToggleFavorite(param);
+	}
+	
+	@RequestMapping(value="/favorite", method=RequestMethod.GET)
+	public String favorite(Model model, HttpSession hs) {
+		int i_user = SecurityUtils.getLoginUserPk(hs);
+		UserPARAM param = new UserPARAM();
+		param.setI_user(i_user);
+		
+		model.addAttribute("data", service.selFavoriteList(param));
+		model.addAttribute(Const.CSS, new String[]{"userFavorite"});
+		model.addAttribute(Const.TITLE, "찜 리스트");
+		model.addAttribute(Const.VIEW, "/user/favorite");
+		return ViewRef.TYPE_1;
 	}
 
 }

@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>${title}</title>
 <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="/resources/css/layout.css">
 <c:if test="${css != null}">
     <c:forEach items="${css}" var="item">
@@ -49,7 +50,7 @@
             		<li onclick="location.href='/restaurant/resMap'">홈</li>
             		<c:if test="${loginUser != null}">
             		<li onclick="location.href='/restaurant/resReg'">등록</li>
-            		<li onclick="location.href='/user/resFavorite'">찜</li>
+            		<li onclick="location.href='/user/favorite'">찜</li>
             		</c:if>
             		<c:if test="${loginUser == null}">
             		<li onclick="alert('로그인이 필요합니다.')">등록</li>

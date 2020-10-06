@@ -79,7 +79,7 @@ public class RestController {
 		service.addHits(param, req);
 		
 		// model.addAttribute("menuList", menuList);
-		model.addAttribute("css", cssList);
+		model.addAttribute(Const.CSS, cssList);
 		model.addAttribute("recMenuList", recList);
 		model.addAttribute("data", data);
 		model.addAttribute(Const.TITLE, data.getNm());
